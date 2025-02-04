@@ -3,7 +3,6 @@ let untyped = '';
 let typed = '';
 let score = 0;
 let typeCount = 0;
-let timeUp = 'タイムアップ！'
 
 // 必要なHTML要素の取得
 const untypedfield = document.getElementById('untyped');
@@ -43,15 +42,6 @@ const cresteText = () => {
 // 配列からランダムにテキストを取得し画面に表示する
     untyped = textLists[random];
     untypedfield.textContent = untyped;
-
-    if(timer <= untyped.substring(0, 1)) {
-        timeUp = 'タイムアップ！'
-        
-        setTimeout(() => {
-            confirm(rankCheck(score));
-        }, 100);
-        return;
-    }
 };
 
 // キー入力の判定
@@ -63,7 +53,7 @@ const keyPress = e => {
         // 100ms後に背景色を元に戻す
         setTimeout(() => {
             wrap.classList.remove('mistyped');
-        }, 10);
+        }, 100);
         return;
     }
     // 正タイプの場合
@@ -78,6 +68,9 @@ const keyPress = e => {
     if(untyped === '') {
     cresteText();
     }
+
+
+
 };
 
 // タイピングスキルのランクを判定
@@ -103,14 +96,15 @@ const rankCheck = score => {
 
 // ゲームを終了
 const gameOver = id => {
-    clearInterval(id);
-
+    untypedfield.textContent = 'タイムアップ！'
+    setTimeout(() => {
     const result = confirm(rankCheck(score));
 
     // OKボタンをクリックされたらリロードする
     if(result == true) {
         window.location.reload();
     }
+    }, 10);
 };
 
 // カウントダウンタイマー
