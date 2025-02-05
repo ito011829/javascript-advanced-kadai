@@ -69,7 +69,13 @@ const keyPress = e => {
     cresteText();
     }
 
+    document.addEventListener('keydown', function(e) {
 
+        if(e.key === untyped.substring(0, 1)) {
+            typeCount++;
+            typecount.textContent = 0 + typeCount;
+        }
+    });
 
 };
 
@@ -141,12 +147,6 @@ start.addEventListener('click', () => {
     document.addEventListener('keypress', keyPress);
 });
 
-document.addEventListener('keydown', function(e) {
 
-    if(e.key === untyped.substring(0, 1)) {
-        typeCount++;
-        typecount.textContent = 0 + typeCount;
-    }
-});
 
 untypedfield.textContent = 'スタートボタンで開始';
